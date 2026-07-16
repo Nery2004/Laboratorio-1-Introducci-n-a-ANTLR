@@ -1,7 +1,10 @@
 __pycache__/
-*.pyc
+*.py[cod]
 *.interp
 *.tokens
+.DS_Store
+.vscode/
+.idea/
 
 program/MiniLangLexer.py
 program/MiniLangParser.py

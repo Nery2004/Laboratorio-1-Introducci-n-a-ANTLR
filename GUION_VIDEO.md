@@ -49,34 +49,35 @@ Duración aproximada: 5 a 7 minutos.
 **Mostrar:** Una terminal en la raíz y ejecutar:
 
 ```bash
-docker build --rm . -t lab1-image
+docker build --no-cache --rm . -t lab1-image
 ```
 
 **Decir:** “Construyo la imagen desde la raíz. Docker instala todas las dependencias con las versiones documentadas.”
 
-Después ejecutar:
-
-```bash
-docker run --rm -ti -v "$(pwd)/program":/program lab1-image
-```
-
-**Decir:** “Inicio el contenedor y monto `program` en el directorio de trabajo `/program`.”
-
 ## 9. Generación de lexer y parser — 4:00 a 4:20
 
-**Mostrar:** Dentro del contenedor, ejecutar:
+**Mostrar:** En la terminal de la computadora, ejecutar:
 
 ```bash
-antlr -Dlanguage=Python3 MiniLang.g4
+docker run --rm -v "$(pwd)/program":/program lab1-image \
+  antlr -Dlanguage=Python3 MiniLang.g4
 ```
 
 Opcionalmente mostrar los archivos:
 
 ```bash
-ls MiniLang*
+ls program/MiniLang*
 ```
 
-**Decir:** “Este comando lee la gramática y genera las clases Python del lexer, parser y Listener. Debe ejecutarse antes del driver y después de cada cambio de la gramática.”
+**Decir:** “Este comando monta `program` en el contenedor, lee la gramática y genera las clases Python del lexer, parser y Listener. Debe ejecutarse antes del driver y después de cada cambio de la gramática.”
+
+Después, abrir una terminal para las pruebas:
+
+```bash
+docker run --rm -ti -v "$(pwd)/program":/program lab1-image
+```
+
+**Decir:** “Inicio el contenedor con el mismo volumen. Ahora estoy en `/program` y puedo ejecutar el driver.”
 
 ## 10. Ejecución del archivo válido — 4:20 a 4:45
 
@@ -98,7 +99,7 @@ python3 Driver.py programa_invalido.txt
 echo $?
 ```
 
-**Decir:** “Ahora pruebo una entrada incorrecta. El código de salida es uno, de modo que el error también puede detectarse desde un script.”
+**Decir:** “Ahora pruebo una entrada incorrecta. El driver cuenta por separado errores léxicos y sintácticos. El código de salida es uno, de modo que el error también puede detectarse desde un script.”
 
 ## 12. Explicación de los errores — 5:10 a 5:40
 

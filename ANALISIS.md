@@ -56,7 +56,7 @@ ANTLR 4 permite recursividad izquierda directa. `expr` aparece al inicio de sus 
 6. `MiniLangParser` recibe el flujo de tokens.
 7. `parser.prog()` inicia el análisis desde la regla principal y construye el árbol.
 8. ANTLR conserva sus mensajes normales con línea, columna y descripción del error.
-9. Un contador de errores permite devolver un código distinto de cero si el lexer o el parser reportan un problema. Este contador no recorre ni interpreta el árbol.
+9. Un contador registra los errores del lexer y `parser.getNumberOfSyntaxErrors()` informa los errores del parser. Así se puede decidir el código de salida sin recorrer ni interpretar el árbol.
 
 El árbol sintáctico se construye, pero todavía no se recorre ni se evalúan las expresiones.
 

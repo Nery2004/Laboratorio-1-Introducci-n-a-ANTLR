@@ -43,22 +43,23 @@ Los archivos Python que genera ANTLR no se guardan en Git porque pueden reconstr
 Desde la raíz del repositorio, construir la imagen:
 
 ```bash
-docker build --rm . -t lab1-image
+docker build --no-cache --rm . -t lab1-image
 ```
 
-Abrir una terminal dentro del contenedor y montar la carpeta `program`:
+Generar directamente el lexer, el parser y las clases auxiliares:
+
+```bash
+docker run --rm -v "$(pwd)/program":/program lab1-image \
+  antlr -Dlanguage=Python3 MiniLang.g4
+```
+
+Este paso debe repetirse cuando cambie la gramática. Después, abrir una terminal dentro del contenedor con la misma carpeta montada:
 
 ```bash
 docker run --rm -ti -v "$(pwd)/program":/program lab1-image
 ```
 
-Los siguientes comandos se ejecutan dentro del contenedor. Primero se generan el lexer, el parser y las clases auxiliares:
-
-```bash
-antlr -Dlanguage=Python3 MiniLang.g4
-```
-
-Este paso debe repetirse cuando cambie la gramática.
+Los siguientes comandos de prueba se ejecutan dentro del contenedor.
 
 ## Pruebas
 
@@ -83,7 +84,7 @@ python3 Driver.py programa_invalido.txt
 echo $?
 ```
 
-ANTLR muestra errores con línea y columna. Al final, el driver muestra `El archivo contiene errores sintácticos.` y devuelve el código `1`.
+ANTLR muestra errores con línea y columna. Al final, el driver muestra la cantidad de errores léxicos y sintácticos y devuelve el código `1`.
 
 También puede probarse el archivo original:
 
@@ -92,6 +93,15 @@ python3 Driver.py program_test.txt
 ```
 
 El driver crea el árbol sintáctico, pero no lo recorre ni evalúa las operaciones. Los Visitors, Listeners de árbol y el análisis semántico quedan fuera del alcance de este laboratorio.
+
+### Resumen de pruebas
+
+| Prueba | Archivo | Resultado esperado |
+|---|---|---|
+| Entrada válida | `programa_valido.txt` | Sin errores |
+| Entrada inválida | `programa_invalido.txt` | Errores con línea y columna |
+| Entrada original | `program_test.txt` | Sin errores |
+| Archivo inexistente | No aplica | Mensaje de error |
 
 ## Códigos de salida
 

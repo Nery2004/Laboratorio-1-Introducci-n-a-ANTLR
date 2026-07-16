@@ -29,23 +29,29 @@ def main(argv: list[str]) -> int:
         print(f"Error: el archivo no existe: {input_path}", file=sys.stderr)
         return 2
 
-    error_counter = ErrorCounter()
+    lexer_errors = ErrorCounter()
 
     try:
         input_stream = FileStream(str(input_path), encoding="utf-8")
         lexer = MiniLangLexer(input_stream)
-        lexer.addErrorListener(error_counter)
+        lexer.addErrorListener(lexer_errors)
 
         token_stream = CommonTokenStream(lexer)
         parser = MiniLangParser(token_stream)
-        parser.addErrorListener(error_counter)
         parser.prog()
     except OSError as error:
         print(f"Error al leer el archivo: {error}", file=sys.stderr)
         return 2
 
-    if error_counter.count:
-        print("El archivo contiene errores sintácticos.", file=sys.stderr)
+    syntax_errors = parser.getNumberOfSyntaxErrors()
+
+    if lexer_errors.count or syntax_errors:
+        print(
+            "El archivo contiene "
+            f"{lexer_errors.count} error(es) léxico(s) y "
+            f"{syntax_errors} error(es) sintáctico(s).",
+            file=sys.stderr,
+        )
         return 1
 
     print("Análisis sintáctico completado sin errores.")
