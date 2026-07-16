@@ -1,5 +1,9 @@
 # Análisis del Laboratorio 1
 
+**Nombre:** Nery Molina
+
+**Carné:** 23218
+
 ## ¿Qué es ANTLR?
 
 ANTLR, cuyo nombre significa *Another Tool for Language Recognition*, es una herramienta que genera analizadores léxicos y sintácticos a partir de una gramática. En este laboratorio genera código Python para reconocer un lenguaje sencillo.

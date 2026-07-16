@@ -141,4 +141,4 @@ chmod +x commands/antlr commands/grun python-venv.sh
 
 ## Video
 
-Enlace de YouTube: [Agregar enlace después de subir el video]
+Enlace de YouTube: pendiente de agregar

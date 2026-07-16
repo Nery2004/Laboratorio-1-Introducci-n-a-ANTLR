@@ -1,5 +1,9 @@
 # Guion del video — Laboratorio 1
 
+**Nombre:** Nery Molina
+
+**Carné:** 23218
+
 Duración aproximada: 5 a 7 minutos.
 
 ## 1. Presentación — 0:00 a 0:25
