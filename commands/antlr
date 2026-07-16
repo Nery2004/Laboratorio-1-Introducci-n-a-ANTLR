@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eu
+
+exec java -jar /usr/local/lib/antlr-4.13.2-complete.jar "$@"

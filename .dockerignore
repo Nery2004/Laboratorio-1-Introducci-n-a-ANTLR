@@ -1,0 +1,10 @@
+.git
+.gitignore
+__pycache__
+*.pyc
+program/*.interp
+program/*.tokens
+program/MiniLangLexer.py
+program/MiniLangParser.py
+program/MiniLangListener.py
+program/MiniLangVisitor.py

@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+*.interp
+*.tokens
+
+program/MiniLangLexer.py
+program/MiniLangParser.py
+program/MiniLangListener.py
+program/MiniLangVisitor.py
