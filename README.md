@@ -141,4 +141,4 @@ chmod +x commands/antlr commands/grun python-venv.sh
 
 ## Video
 
-Enlace de YouTube: pendiente de agregar
+Enlace de YouTube: https://www.youtube.com/watch?v=Hub1dziBcH4
